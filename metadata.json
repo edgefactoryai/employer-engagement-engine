@@ -1,0 +1,7 @@
+{
+  "name": "(E^3)_Employer Engagement Engine_FINAL_v7",
+  "description": "Add the ability to search by Workforce Title/Description or ONET Codes which can be found in the Department of Apprenticeship Standards.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
