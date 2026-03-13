@@ -2722,17 +2722,23 @@ const App: React.FC = () => {
 
                 <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 bg-slate-50/50 min-h-0 no-scrollbar">
                   {supportMessages.length === 0 && (
-                    <div className="h-full flex flex-col items-center justify-center text-center space-y-6 px-6 max-w-sm mx-auto">
-                      <div className="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center shadow-inner">
+                    <div className="h-full flex flex-col items-center justify-center text-center space-y-6 px-6 max-w-3xl mx-auto py-8">
+                      <div className="w-full mb-4">
+                        <div className="sl-embed" style={{position: 'relative', paddingBottom: 'calc(47.46% + 25px)', width: '100%', height: 0, transform: 'scale(1)'}}>
+                          <iframe loading="lazy" className="sl-demo" src="https://app.storylane.io/demo/lepfeusd8mxu?embed=popup" name="sl-embed" allow="fullscreen" allowFullScreen style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: '1px solid rgba(63,95,172,0.35)', boxShadow: '0px 0px 18px rgba(26, 19, 72, 0.15)', borderRadius: '10px', boxSizing: 'border-box'}}></iframe>
+                        </div>
+                      </div>
+
+                      <div className="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center shadow-inner mt-4">
                         <Zap size={32} />
                       </div>
                       <div className="space-y-2">
                         <p className="text-slate-900 font-black text-lg tracking-tight">E^3 Command Central</p>
                         <p className="text-slate-500 text-xs font-medium leading-relaxed">
-                          Ask me anything about how E^3 works, how to manage partnerships, or how to build your LinkedIn strategy.
+                          Watch the video above for a quick walkthrough, or ask me anything about how E^3 works, how to manage partnerships, or how to build your LinkedIn strategy.
                         </p>
                       </div>
-                      <div className="grid grid-cols-1 gap-2 w-full">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 w-full max-w-xl">
                         {[
                           'How do I exclude current partners?', 
                           'How is the match score calculated?', 
