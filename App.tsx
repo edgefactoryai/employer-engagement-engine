@@ -1434,8 +1434,8 @@ const App: React.FC = () => {
 
               <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
                 <p className="text-xs font-black text-slate-400 uppercase tracking-widest">Email Us At</p>
-                <a href="mailto:info@edgefactoryai.com" className="text-xl font-black text-blue-600 hover:text-blue-700 transition-colors block break-all">
-                  info@edgefactoryai.com
+                <a href="mailto:sales@edgefactoryai.com" className="text-xl font-black text-blue-600 hover:text-blue-700 transition-colors block break-all">
+                  sales@edgefactoryai.com
                 </a>
               </div>
 
@@ -1578,7 +1578,7 @@ const App: React.FC = () => {
                   <div 
                     className="inline-flex items-center justify-center px-8 py-4 bg-blue-600 text-white rounded-2xl font-black text-sm tracking-widest shadow-lg shadow-blue-900/20 select-all"
                   >
-                    info@edgefactoryai.com
+                    sales@edgefactoryai.com
                   </div>
                 </div>
               </div>
@@ -3388,13 +3388,6 @@ const App: React.FC = () => {
            </div>
         </div>
       )}
-
-      {/* Watermark Overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] flex items-center justify-center overflow-hidden opacity-[0.03] select-none">
-        <div className="text-[20vw] font-black rotate-[-30deg] uppercase tracking-[0.2em] text-slate-900">
-          DEMO
-        </div>
-      </div>
     </div>
   );
 };
