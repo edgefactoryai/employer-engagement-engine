@@ -59,10 +59,10 @@ export interface OutreachAssets {
   followUps: string[];
   callScript: string[];
   subjectLines: string[];
-  linkedInMessage: string;
+  socialMessage: string;
 }
 
-export interface LinkedInPost {
+export interface SocialPost {
   day: number;
   pillar: string;
   content: string;
@@ -70,4 +70,4 @@ export interface LinkedInPost {
   imageUrl?: string;
 }
 
-export type Step = 'landing' | 'auth' | 'contact' | 'intake' | 'discovery' | 'report' | 'outreach' | 'linkedin' | 'chat' | 'docs' | 'terms' | 'privacy' | 'email-policy' | 'support' | 'dashboard';
+export type Step = 'landing' | 'auth' | 'contact' | 'intake' | 'discovery' | 'report' | 'outreach' | 'social' | 'chat' | 'docs' | 'terms' | 'privacy' | 'email-policy' | 'support' | 'dashboard' | 'settings';

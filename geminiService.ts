@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type, GenerateContentResponse, Modality, FunctionDeclaration } from "@google/genai";
-import { WorkforceProfile, EmployerMatch, OutreachSegment, OutreachAssets, LinkedInPost } from "./types";
+import { WorkforceProfile, EmployerMatch, OutreachSegment, OutreachAssets, SocialPost } from "./types";
 
 /**
  * Takes structured form data and enhances it with AI to provide target job titles 
@@ -155,7 +155,7 @@ export const generateOutreach = async (profile: WorkforceProfile, employer: Empl
     Segment focus: ${employer.segment}. 
     Region: ${profile.region}. 
     CTA: ${profile.ctaLink || 'Visit our official website'}. 
-    Include 1 primary email, 3 follow-ups, a phone call script, and a specific LinkedIn message (DM/InMail style). 
+    Include 1 primary email, 3 follow-ups, a phone call script, and a specific social media message (DM style). 
     
     CRITICAL SIGNATURE & COMPLIANCE REQUIREMENTS:
     1. Every email MUST end with a professional signature block containing:
@@ -173,9 +173,9 @@ export const generateOutreach = async (profile: WorkforceProfile, employer: Empl
           followUps: { type: Type.ARRAY, items: { type: Type.STRING }, description: '3 follow-up emails, 80-120 words each' },
           callScript: { type: Type.ARRAY, items: { type: Type.STRING }, description: 'Bullet points for a call script' },
           subjectLines: { type: Type.ARRAY, items: { type: Type.STRING }, description: '3 subject line options' },
-          linkedInMessage: { type: Type.STRING, description: 'A tailored, personal LinkedIn outreach message' }
+          socialMessage: { type: Type.STRING, description: 'A tailored, personal social media outreach message' }
         },
-        required: ['primaryEmail', 'followUps', 'callScript', 'subjectLines', 'linkedInMessage']
+        required: ['primaryEmail', 'followUps', 'callScript', 'subjectLines', 'socialMessage']
       }
     }
   });
@@ -183,11 +183,11 @@ export const generateOutreach = async (profile: WorkforceProfile, employer: Empl
   return JSON.parse(response.text);
 };
 
-export const generateLinkedInCalendar = async (profile: WorkforceProfile): Promise<LinkedInPost[]> => {
+export const generateSocialCalendar = async (profile: WorkforceProfile): Promise<SocialPost[]> => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
-    contents: `Generate exactly 10 FRESH and UNIQUE LinkedIn posts specifically written for AN EMPLOYER AUDIENCE to recruit them for the ${profile.title} workforce program. 
+    contents: `Generate exactly 10 FRESH and UNIQUE social media posts specifically written for AN EMPLOYER AUDIENCE to recruit them for the ${profile.title} workforce program. 
     Current timestamp to ensure uniqueness: ${Date.now()}.
     Focus on ROI, filling skills gaps, and simplifying their hiring pipeline. 
     Avoid repetition from previous runs. Use a professional partnership-oriented tone. 
@@ -224,9 +224,9 @@ export const generateLinkedInCalendar = async (profile: WorkforceProfile): Promi
   return JSON.parse(response.text);
 };
 
-export const generatePostGraphic = async (post: LinkedInPost, profile: WorkforceProfile): Promise<string> => {
+export const generatePostGraphic = async (post: SocialPost, profile: WorkforceProfile): Promise<string> => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const prompt = `A professional, clean, and high-impact LinkedIn post graphic representing the theme: "${post.pillar}". 
+  const prompt = `A professional, clean, and high-impact social media post graphic representing the theme: "${post.pillar}". 
   Specific context: "${post.content.substring(0, 300)}".
   Recruiting employers for a "${profile.title}" workforce program in the "${profile.industries.join(", ")}" industries. 
   Visual Style: Modern corporate photography or high-end professional digital illustration. 
@@ -285,7 +285,7 @@ const navigateAppFunctionDeclaration: FunctionDeclaration = {
       step: {
         type: Type.STRING,
         description: 'The target view ID to switch to.',
-        enum: ['landing', 'intake', 'discovery', 'report', 'outreach', 'linkedin', 'chat', 'support', 'docs']
+        enum: ['landing', 'intake', 'discovery', 'report', 'outreach', 'social', 'chat', 'support', 'docs']
       },
       reason: {
         type: Type.STRING,
@@ -306,12 +306,12 @@ export const getSupportExpertResponse = async (userMessage: string, history: {ro
   - Step 1 (Intake): Enter program details and manage current/past partners.
   - Step 2 (Discovery): View AI-enhanced regional economic analytics and elevator pitches.
   - Step 3 (Match Report): Review 100 ranked local employers with matching scores.
-  - Step 4 (Campaign Builder): Access tailored email sequences, call scripts, and LinkedIn DMs.
-  - Step 5 (LinkedIn Engine): Generate social media strategies with AI-designed graphics.
+  - Step 4 (Campaign Builder): Access tailored email sequences, call scripts, and social DMs.
+  - Step 5 (Network Builder): Generate social media strategies with AI-designed graphics.
   - E^3 Search: Grounded market lead discovery using Google Search.
   
   INTERACTIVE NAVIGATION:
-  You can move the user between app sections. If they want to "start", "see my matches", "find jobs", or "view my LinkedIn plan", use the 'navigateApp' tool.
+  You can move the user between app sections. If they want to "start", "see my matches", "find jobs", or "view my social plan", use the 'navigateApp' tool.
   
   TONE: Professional, encouraging, and technically precise. Use Markdown formatting.
   If a user is stuck, explain the 5-step lifecycle and guide them.`;
